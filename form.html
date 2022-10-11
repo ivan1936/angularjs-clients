@@ -57,7 +57,7 @@
                 <label for="personImg" class="col-sm-4 control-label">Фото</label>
                 <div class="col-sm-8">
                     <input type="text" name="personsImg" ng-model="personImg" class="form-control" id="personImg"
-                        placeholder="Фотография клиента">
+                        placeholder="Фото клиента (file.jpg)">
                 </div>
             </div>
             <div class="form-group">
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 prokrutka">
+            <div class="col-md-12 scroll">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -124,9 +124,9 @@
                             <mat-card-subtitle>
                                 <br><span class="md-subhead">{{person.birthDate}}</span>
                             </mat-card-subtitle>
-                            <div class="wrapper-img exmpl">
-                                <img ng-if="person.img" src="img/{{person.img}}" width="150px" height="175px">
+                            <div class="wrapper-img align">
                                 <img ng-if="!person.img" src="img/empty.png" width="150px" height="175px">
+                                <img ng-if="person.img" src="img/{{person.img}}" width="150px" height="175px">
                             </div>
                         </mat-card-title-group>
                     </a>
