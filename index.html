@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="personsApp">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.5/angular-material.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container" ng-controller="personsCtrl">
+        <div ng-view></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+    <script>
+        const app = angular.module("personsApp", ["ngRoute", 'ngMdIcons']);
+        app.config(function ($routeProvider) {
+            $routeProvider.when(
+                "/",
+                {
+                    templateUrl: "form.html",
+                }
+            )
+                .when(
+                    "/:id",
+                    {
+                        templateUrl: "person.html",
+                        controller: "personCtrl"
+                    }
+                )
+                .otherwise({
+                    template: '404 no such page'
+                })
+        });
+
+        let view = 'line';
+        let icon = 'view_module';
+        let model = [];
+        app.controller("personsCtrl", function ($scope, $http) {
+            $scope.view = view;
+            $scope.icon = icon;
+            $scope.persons = model;
+
+            $scope.addPerson = function (
+                personLastName,
+                personFirstName,
+                personBirthDate,
+                personAddress,
+                personCard,
+                personImg
+            ) {
+                const id = "id" + Math.random().toString(16).slice(2);
+                $scope.persons.push({
+                    id,
+                    lastName: personLastName,
+                    firstName: personFirstName,
+                    birthDate: personBirthDate,
+                    address: personAddress,
+                    card: personCard,
+                    img: personImg
+                });
+
+                model = $scope.persons;
+            };
+
+            $scope.deletePerson = function (idPerson) {
+                const persons = $scope.persons.filter(p => p.id !== idPerson);
+                $scope.persons = persons;
+                model = persons;
+            };
+
+            $scope.toogleView = function () {
+                view = view === 'line' ? 'table' : 'line'
+                icon = icon === 'view_module' ? 'reorder' : 'view_module'
+
+                $scope.view = view;
+                $scope.icon = icon;
+                console.log(view)
+            };
+
+            $scope.sortByName = function (p) {
+                $scope.nameSorting = p;
+            };
+
+            $http.get("person.json").then(
+                function successResp(response) {
+                    $scope.persons = response.data.persons;
+                    model = $scope.persons;
+                    console.log($scope.persons);
+                }
+            )
+        });
+
+        app.controller('personCtrl', function ($scope, $routeParams) {
+            console.log($routeParams);
+            const personId = $routeParams.id;
+            $scope.person = model.find(p => p.id === personId);
+        });
+    </script>
+</body>
+
+</html>

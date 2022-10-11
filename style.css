@@ -1,0 +1,52 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: inline-block;
+    width: 315px;
+    margin-bottom: 8px;
+    margin-right: 5px;
+    border: 3px solid #515151;
+    padding: 5px;
+}
+
+.wrapper-img {
+    width: 300px;
+    height: 300px;
+}
+
+.exmpl {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exmpl img {
+    height: 100%;
+    width: auto;
+}
+
+tbody>tr:hover {
+    font-weight: bold;
+}
+
+.del-btn:hover {
+    font-weight: bold;
+    color: darkred;
+}
+
+.prokrutka {
+    width: 100%;
+    height: 420px;
+    background: #fff;
+    border: 1px solid #C1C1C1;
+    overflow: auto;
+    border-radius: 7px;
+}
+
+.filter {
+    margin-bottom: 10px;
+}

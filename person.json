@@ -1,0 +1,49 @@
+{
+    "persons": [
+        {
+            "id": "1",
+            "card": "30101810000000000001",
+            "firstName": "Евгений",
+            "lastName": "Поляков",
+            "birthDate": "22.01.1980",
+            "address": "г. Москва",
+            "img": "mjRwhvqEC0U.jpg"
+        },
+        {
+            "id": "2",
+            "card": "30101810000000000002",
+            "firstName": "Иван",
+            "lastName": "Сергеев",
+            "birthDate": "01.02.1991",
+            "address": "г. Москва",
+            "img": ""
+        },
+        {
+            "id": "3",
+            "card": "30101810000000000003",
+            "firstName": "Нелли",
+            "lastName": "Джамекова",
+            "birthDate": "05.07.1995",
+            "address": "г. Санкт-Петербург",
+            "img": "rDEOVtE7vOs.jpg"
+        },
+        {
+            "id": "4",
+            "card": "30101810000000000004",
+            "firstName": "Тамара",
+            "lastName": "Пущина",
+            "birthDate": "07.07.1997",
+            "address": "г. Астрахань",
+            "img": "QXevDflbl8A.jpg"
+        },
+        {
+            "id": "5",
+            "card": "30101810000000000005",
+            "firstName": "Надежда",
+            "lastName": "Теплых",
+            "birthDate": "25.09.2003",
+            "address": "г. Волгоград",
+            "img": "B4TjXnI0Y2c.jpg"
+        }
+    ]
+}

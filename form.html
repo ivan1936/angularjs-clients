@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal" name="addClientForm" novalidate>
+            <legend style="text-align: center;">Список клиентов</legend>
+            <div class="form-group"
+                ng-class="{'has-error': addClientForm.personLastName.$error.required && addClientForm.personLastName.$dirty}">
+                <label for="personLastName" class="col-sm-4 control-label">Фамилия</label>
+                <div class="col-sm-8">
+                    <input type="text" required name="personLastName" ng-model="personLastName" class="form-control"
+                        id="personLastName" placeholder="Фамилия клиента">
+                    <span class="error"
+                        ng-show="addClientForm.personLastName.$dirty && addClientForm.personLastName.$error.required">Введите
+                        фамилию клиента!</span>
+                </div>
+            </div>
+            <div class="form-group"
+                ng-class="{'has-error': addClientForm.personFirstName.$error.required && addClientForm.personFirstName.$dirty}">
+                <label for="personFirstName" class="col-sm-4 control-label">Имя</label>
+                <div class="col-sm-8">
+                    <input type="text" required name="personFirstName" ng-model="personFirstName" class="form-control"
+                        id="personFirstName" placeholder="Имя клиента">
+                    <span class="error"
+                        ng-show="addClientForm.personFirstName.$dirty && addClientForm.personFirstName.$error.required">Введите
+                        имя клиента!</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="personBirthDate" class="col-sm-4 control-label">Дата рождения</label>
+                <div class="col-sm-8">
+                    <input type="text" name="personBirthDate" ng-model="personBirthDate" class="form-control"
+                        id="personBirthDate" placeholder="Дата рождения клиента">
+                </div>
+            </div>
+            <div class="form-group"
+                ng-class="{'has-error': addClientForm.personAddress.$error.required && addClientForm.personAddress.$dirty}">
+                <label for="personAddress" class="col-sm-4 control-label">Адрес</label>
+                <div class="col-sm-8">
+                    <input type="text" required name="personAddress" ng-model="personAddress" class="form-control"
+                        id="personAddress" placeholder="Адрес клиента">
+                    <span class="error"
+                        ng-show="addClientForm.personAddress.$dirty && addClientForm.personAddress.$error.required">Клиент
+                        не может быть без адреса!</span>
+                </div>
+            </div>
+            <div class="form-group"
+                ng-class="{'has-error': addClientForm.personCard.$error.required && addClientForm.personCard.$dirty}">
+                <label for="personCard" class="col-sm-4 control-label">Номер карты</label>
+                <div class="col-sm-8">
+                    <input type="text" required name="personCard" ng-model="personCard" class="form-control"
+                        id="personCard" placeholder="Номер карточки клиента">
+                    <span class="error"
+                        ng-show="addClientForm.personCard.$dirty && addClientForm.personCard.$error.required">Клиент
+                        не может быть без номера карточки!</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="personImg" class="col-sm-4 control-label">Фото</label>
+                <div class="col-sm-8">
+                    <input type="text" name="personsImg" ng-model="personImg" class="form-control" id="personImg"
+                        placeholder="Фотография клиента">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <button
+                        ng-disabled="addClientForm.personLastName.$invalid || addClientForm.personFirstName.$invalid || addClientForm.personAddress.$invalid || addClientForm.personCard.$invalid"
+                        ng-click="addPerson(personLastName, personFirstName, personBirthDate, 
+                        personAddress, personCard, personImg)" class="btn btn-default">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ng-md-icon ng-click="toogleView()" icon="{{icon}}" style="fill: black" size="36"></ng-md-icon>
+
+<div ng-switch on="view">
+    <div ng-switch-when="line">
+        <div class="row filter">
+            <div class="col-md-12">
+                <input type="text" name="personsSelect" ng-model="selectPersons" class="form-control"
+                    placeholder="Поиск по фильтру">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 prokrutka">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;" ng-click="sortByName('lastName')">Фамилия Имя</th>
+                            <th>Дата Рождения</th>
+                            <th>Адрес</th>
+                            <th>Карточка</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="person in persons | filter:selectPersons">
+                            <td style="text-align: center;"><a href="#/{{person.id}}"
+                                    style="display:block;">{{person.firstName}}
+                                    {{person.lastName}}</a></td>
+                            <td>{{person.birthDate}}</td>
+                            <td>{{person.address}}</td>
+                            <td>{{person.card}}</td>
+                            <td><button class="btn btn-link del-btn" ng-click="deletePerson(person.id)">Удалить</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="table">
+        <div class="wrapper">
+            <div ng-repeat="person in persons">
+                <mat-card class="card">
+                    <a href="#/{{person.id}}" style="display:block;">
+                        <mat-card-title-group>
+                            <mat-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">{{person.firstName}} {{person.lastName}}</span>
+                                </md-card-title-text>
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                <br><span class="md-subhead">{{person.birthDate}}</span>
+                            </mat-card-subtitle>
+                            <div class="wrapper-img exmpl">
+                                <img ng-if="person.img" src="img/{{person.img}}" width="150px" height="175px">
+                                <img ng-if="!person.img" src="img/empty.png" width="150px" height="175px">
+                            </div>
+                        </mat-card-title-group>
+                    </a>
+                    <mat-card-content>
+                        <span>{{person.card}}</span><br>
+                        <span>{{person.address}}</span><br>
+                    </mat-card-content>
+                    <md-card-actions layout="row" layout-align="start center">
+                        <md-button class="btn btn-link del-btn" ng-click="deletePerson(person.id)">Удалить</md-button>
+                    </md-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
